@@ -3,9 +3,6 @@ from hu.mantra.py.remotedesktop.objects.GraphicalUserInterface import GraphicalU
 
 
 class MainController:
-    """
-    Skeleton for a generic Python class.
-    """
 
     def __init__(self):
         self.mode = None
@@ -28,16 +25,15 @@ class MainController:
         else:
             print("GUI komponens validálása sikertelen")
 
-
     def start(self):
         print("MainController started.")
         print("-----------------------")
 
-
         while True:
-            self.mode = input("Kérlek válassz az alábbi lehetőségek közül! [GUI / CLI]: ")
+            self.mode = input(
+                "Kérlek válassz az alábbi lehetőségek közül! [GUI / CLI]: ").upper()
 
-            if self.mode.upper() not in ["GUI", "CLI"]:
+            if self.mode not in ["GUI", "CLI"]:
                 print("Hibás bevitel!")
                 continue
             else:
@@ -48,8 +44,10 @@ class MainController:
                     while True:
                         self.CLI.get_command()
                         self.CLI.execute_command()
-                break
+                elif self.mode == "GUI":
+                    self.GUI.create_main_window()
+                    break
 
-# Example usage
+
 if __name__ == "__main__":
     MainController().start()
